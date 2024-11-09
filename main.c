@@ -36,6 +36,7 @@ void sleep(int);
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
 
 
 int main(int argc, char** argv) {
@@ -56,7 +57,7 @@ int main(int argc, char** argv) {
     show_path = atoi(argv[2]);
   }
 
-  // Run the code until an arena is created that is possible
+  // Run the code until an arena is created that is solvable
   while (run) {
     total_exceptions = 0;
     createArena();
@@ -72,9 +73,9 @@ int main(int argc, char** argv) {
     } free(exceptions);
 
     initMemory(&robot);
-    dfs(&robot, false, show_path, delay);
+    dfs(&robot, home, false, show_path, delay);
 
-    if (robot.markers == total_markers) {
+    if (markerCount(&robot) == total_markers) {
       // Erase robot's memory
       for (int i = 0; i < height; i ++) {
         free(robot.memory[i]);
@@ -82,14 +83,16 @@ int main(int argc, char** argv) {
       
       setWindowSize(width * SIZE, height * SIZE);
       drawArena();
+      drawHome(home);
 
       robot.x = home[0];
       robot.y = home[1];
       initMemory(&robot);
       drawRobot(&robot, delay);
 
-      dfs(&robot, true, show_path, delay);
+      dfs(&robot, home, true, show_path, delay);
       dropMarker(&robot);
+      drawHome(home);
       run = false;
     }
 
