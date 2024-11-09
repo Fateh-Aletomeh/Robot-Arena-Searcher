@@ -34,7 +34,7 @@ gcc *.c
 ```
 
 ## Run program
-By default, the ```delay``` of the robot is set to **50** and ``` show_path``` (boolean value which, if true, leaves a green trace wherever the robot moves) is **false**.
+By default, the ```delay``` of the robot is set to **50** and ```show_path``` (boolean value which, if true, leaves a green trace wherever the robot moves) is **false**.
 
 When running the program, you have the option to change these values in the command line. To set ```show_path``` to **false**, type **0**. To set it to **true**, type any **non-zero integer**.
 ### Unix
