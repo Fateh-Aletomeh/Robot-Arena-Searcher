@@ -25,11 +25,11 @@ The robot uses the depth-first search algorithm to search the entire arena. This
 
 ## Compile
 Command to compile program:
-```sh
+```
 gcc main.c graphics.c background.c robot.c
 ```
 OR
-```sh
+```
 gcc *.c
 ```
 
@@ -38,10 +38,10 @@ By default, the ```delay``` of the robot is set to **50** and ``` show_path``` (
 
 When running the program, you have the option to change these values in the command line. To set ```show_path``` to **false**, type **0**. To set it to **true**, type any **non-zero integer**.
 ### Unix
-```sh
+```
 ./a.out {delay} {show_path} | java -jar drawapp-4.0.jar
 ```
 ### Windows
-```sh
+```
 ./a.exe {delay} {show_path} | java -jar drawapp-4.0.jar
 ```
