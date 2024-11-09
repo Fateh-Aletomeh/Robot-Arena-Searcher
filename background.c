@@ -52,8 +52,8 @@ int** generateObstacles() {
 // Returns true if coordinate is an empty square
 bool emptySquare(int* coord) {
   for (int i = 0; i < total_exceptions; i ++) {
-    if (coord[0] == exceptions[i][0] && coord[1] == exceptions[i][1]) return true;
-  } return false;
+    if (coord[0] == exceptions[i][0] && coord[1] == exceptions[i][1]) return false;
+  } return true;
 }
 
 
@@ -66,7 +66,7 @@ int** generateMarkers() {
     do {
       coords[i][0] = randInt(1, width - 2);
       coords[i][1] = randInt(1, height - 2);
-    } while (emptySquare(coords[i]));
+    } while (! emptySquare(coords[i]));
     addException(coords[i]);
   }
 
