@@ -1,5 +1,5 @@
-# C Coursework
-My program is somewhere between stage 6 and 7. The program generates a random-sized rectangular arena with a random number of obstacles and markers, and the program is always solvable.
+# Robot Arena Searching Algorithm
+The program generates a random-sized rectangular arena with a random number of obstacles and markers, and the program is always solvable.
 
 ## File structure
 | File | Description |
