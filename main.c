@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
   width = randInt(22, 36);
   height = randInt(12, 18);
   bool run = true;
-  struct Robot robot;
+  Robot robot;
   int* home;
 
   // Default values for delay and show_path

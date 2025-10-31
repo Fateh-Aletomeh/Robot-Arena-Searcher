@@ -12,11 +12,11 @@ extern int total_exceptions;
 extern int width;
 extern int height;
 
-struct Robot {
+typedef struct {
   int x, y;
   int direction;
   int markers;
   int** memory;
-};
+} Robot;
 
 #endif
