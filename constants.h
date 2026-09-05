@@ -1,8 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-extern int** arena;
-extern int** exceptions;
+extern int **arena;
+extern int **exceptions;
 extern int total_markers;
 extern int total_obstacles;
 extern int total_exceptions;
@@ -14,7 +14,7 @@ typedef struct {
   int x, y;
   int direction;
   int markers;
-  int** memory;
+  int **memory;
 } Robot;
 
 #endif

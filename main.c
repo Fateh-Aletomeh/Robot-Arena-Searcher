@@ -1,7 +1,21 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
-enum colour {black,blue,cyan,darkgray,gray,green,lightgray,magenta,orange,pink,red,white,yellow};
+enum colour {
+  black,
+  blue,
+  cyan,
+  darkgray,
+  gray,
+  green,
+  lightgray,
+  magenta,
+  orange,
+  pink,
+  red,
+  white,
+  yellow
+};
 typedef enum colour colour;
 
 void drawLine(int, int, int, int);
@@ -13,8 +27,8 @@ void drawArc(int, int, int, int, int, int);
 void fillArc(int, int, int, int, int, int);
 void drawPolygon(int, int[], int[]);
 void fillPolygon(int, int[], int[]);
-void drawString(char*, int, int);
-void displayImage(char*, int, int);
+void drawString(char *, int, int);
+void displayImage(char *, int, int);
 
 void setColour(colour);
 void setRGBColour(int, int, int);
@@ -29,18 +43,16 @@ void sleep(int);
 
 #endif
 
-
-#include "constants.h"
 #include "background.h"
+#include "constants.h"
 #include "robot.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
 
-
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
   srand(time(NULL));
-  
+
   // Default values
   int delay = 50;
   bool show_path = false;
@@ -52,12 +64,12 @@ int main(int argc, char** argv) {
     show_path = atoi(argv[2]);
     SIZE = atoi(argv[3]);
   }
-  
+
   WIDTH = 1400 / SIZE;
   HEIGHT = 650 / SIZE;
   bool run = true;
   Robot robot;
-  int* home;  
+  int *home;
 
   // Run the code until an arena is created that is solvable
   while (run) {
@@ -72,7 +84,8 @@ int main(int argc, char** argv) {
     // Free memory
     for (int i = 0; i < total_exceptions; ++i) {
       free(exceptions[i]);
-    } free(exceptions);
+    }
+    free(exceptions);
 
     initMemory(&robot);
     dfs(&robot, home, false, false, 0);
@@ -81,8 +94,9 @@ int main(int argc, char** argv) {
       // Erase robot's memory
       for (int i = 0; i < HEIGHT; ++i) {
         free(robot.memory[i]);
-      } free(robot.memory);
-      
+      }
+      free(robot.memory);
+
       setWindowSize(WIDTH * SIZE, HEIGHT * SIZE);
       drawArena();
       drawHome(home);
