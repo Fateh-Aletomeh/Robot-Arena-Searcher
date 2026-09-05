@@ -2,6 +2,11 @@
 
 The program generates a random-sized rectangular arena with a random number of obstacles and markers, and the program is always solvable.
 
+## Requirements
+
+- Java 23
+- GCC
+
 ## File structure
 
 | File                        | Description                                       |
