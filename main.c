@@ -36,26 +36,28 @@ void sleep(int);
 #include <stdbool.h>
 #include <stdlib.h>
 #include <time.h>
-#include <stdio.h>
 
 
 int main(int argc, char** argv) {
   srand(time(NULL));
-  width = randInt(22, 36);
-  height = randInt(12, 18);
-  bool run = true;
-  Robot robot;
-  int* home;
-
-  // Default values for delay and show_path
+  
+  // Default values
   int delay = 50;
   bool show_path = false;
+  SIZE = 10;
 
   // Change delay and show_path to what user decides
-  if (argc == 3) {
+  if (argc == 4) {
     delay = atoi(argv[1]);
     show_path = atoi(argv[2]);
+    SIZE = atoi(argv[3]);
   }
+  
+  WIDTH = 1400 / SIZE;
+  HEIGHT = 650 / SIZE;
+  bool run = true;
+  Robot robot;
+  int* home;  
 
   // Run the code until an arena is created that is solvable
   while (run) {
@@ -68,20 +70,20 @@ int main(int argc, char** argv) {
     robot.markers = 0;
 
     // Free memory
-    for (int i = 0; i < total_exceptions; i ++) {
+    for (int i = 0; i < total_exceptions; ++i) {
       free(exceptions[i]);
     } free(exceptions);
 
     initMemory(&robot);
-    dfs(&robot, home, false, show_path, delay);
+    dfs(&robot, home, false, false, 0);
 
     if (markerCount(&robot) == total_markers) {
       // Erase robot's memory
-      for (int i = 0; i < height; i ++) {
+      for (int i = 0; i < HEIGHT; ++i) {
         free(robot.memory[i]);
       } free(robot.memory);
       
-      setWindowSize(width * SIZE, height * SIZE);
+      setWindowSize(WIDTH * SIZE, HEIGHT * SIZE);
       drawArena();
       drawHome(home);
 
@@ -97,7 +99,7 @@ int main(int argc, char** argv) {
     }
 
     // Free memory
-    for (int i = 0; i < height; i ++) {
+    for (int i = 0; i < HEIGHT; ++i) {
       free(arena[i]);
       free(robot.memory[i]);
     }

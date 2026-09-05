@@ -10,8 +10,9 @@ int** exceptions = NULL;
 int total_markers = 0;
 int total_obstacles = 0;
 int total_exceptions = 0;
-int width = 0;
-int height = 0;
+int WIDTH = 0;
+int HEIGHT = 0;
+int SIZE = 10;
 
 
 // Generate random int between min and max (both inclusive)
@@ -35,13 +36,13 @@ void addException(int* coord) {
 
 
 int** generateObstacles() {
-  total_obstacles = randInt((width * height) / 4, (width * height) / 2.5);
+  total_obstacles = randInt((WIDTH * HEIGHT) / 4, (WIDTH * HEIGHT) / 2.5);
   int** coords = malloc(total_obstacles * sizeof(int*));
 
-  for (int i = 0; i < total_obstacles; i ++) {
+  for (int i = 0; i < total_obstacles; ++i) {
     coords[i] = malloc(2 * sizeof(int));
-    coords[i][0] = randInt(1, width - 2);
-    coords[i][1] = randInt(1, height - 2);
+    coords[i][0] = randInt(1, WIDTH - 2);
+    coords[i][1] = randInt(1, HEIGHT - 2);
     addException(coords[i]);
   }
 
@@ -51,21 +52,21 @@ int** generateObstacles() {
 
 // Returns true if coordinate is an empty square
 bool emptySquare(int* coord) {
-  for (int i = 0; i < total_exceptions; i ++) {
+  for (int i = 0; i < total_exceptions; ++i) {
     if (coord[0] == exceptions[i][0] && coord[1] == exceptions[i][1]) return false;
   } return true;
 }
 
 
 int** generateMarkers() {
-  total_markers = randInt(4, (width * height) / 20);
+  total_markers = randInt(10, (WIDTH * HEIGHT) / 10);
   int** coords = malloc(total_markers * sizeof(int*));
 
-  for (int i = 0; i < total_markers; i ++) {
+  for (int i = 0; i < total_markers; ++i) {
     coords[i] = malloc(2 * sizeof(int));
     do {
-      coords[i][0] = randInt(1, width - 2);
-      coords[i][1] = randInt(1, height - 2);
+      coords[i][0] = randInt(1, WIDTH - 2);
+      coords[i][1] = randInt(1, HEIGHT - 2);
     } while (! emptySquare(coords[i]));
     addException(coords[i]);
   }
@@ -77,7 +78,7 @@ int** generateMarkers() {
 // Returns true if object coordinates were at given (x, y) and inserts object
 // Otherwise, it returns false
 bool insertObject(int** coords, int len, int x, int y, int value) {
-  for (int i = 0; i < len; i ++) {
+  for (int i = 0; i < len; ++i) {
     if (x == coords[i][0] && y == coords[i][1]) {
       arena[y][x] = value;
       return true;
@@ -98,14 +99,14 @@ Key:
 void createArena() {
   int** obstacle_coords = generateObstacles();
   int** marker_coords = generateMarkers();
-  arena = malloc(height * sizeof(int*));
+  arena = malloc(HEIGHT * sizeof(int*));
   bool flag;
 
-  for (int y = 0; y < height; y ++) {
-    arena[y] = calloc(width, sizeof(int));
+  for (int y = 0; y < HEIGHT; y ++) {
+    arena[y] = calloc(WIDTH, sizeof(int));
 
-    for (int x = 0; x < width; x ++) {
-      if (y == 0 || y == height - 1 || x == 0 || x == width - 1) {
+    for (int x = 0; x < WIDTH; x ++) {
+      if (y == 0 || y == HEIGHT - 1 || x == 0 || x == WIDTH - 1) {
         // Insert walls
         arena[y][x] = 1;
       } else {
@@ -119,11 +120,11 @@ void createArena() {
   }
 
   // Free memory
-  for (int i = 0; i < total_obstacles; i ++) {
+  for (int i = 0; i < total_obstacles; ++i) {
     free(obstacle_coords[i]);
   } free(obstacle_coords);
 
-  for (int i = 0; i < total_markers; i ++) {
+  for (int i = 0; i < total_markers; ++i) {
     free(marker_coords[i]);
   } free(marker_coords);
 }
@@ -160,15 +161,15 @@ void drawObstacle(int x, int y) {
 
 
 void drawMarker(int x, int y) {
-  setColour(gray);
+  setColour(pink);
   fillRect(x * SIZE, y * SIZE, SIZE, SIZE);
 }
 
 
 void drawArena() {
   background();
-  for (int y = 0; y < height; y ++) {
-    for (int x = 0; x < width; x ++) {
+  for (int y = 0; y < HEIGHT; y ++) {
+    for (int x = 0; x < WIDTH; x ++) {
       switch (arena[y][x]) {
         case 0:
           drawEmptySquare(x, y);

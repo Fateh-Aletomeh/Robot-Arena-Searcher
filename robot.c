@@ -41,13 +41,11 @@ https://medium.com/@ojhasaurabh2099/traversing-a-grid-using-dfs-ac7a391f7af8
 */
 
 
-char images[4][14] = {"Car_Up.png", "Car_Right.png", "Car_Down.png", "Car_Left.png"};
-
-
 void drawRobot(Robot* obj, int delay) {
   foreground();
   clear();
-  displayImage(images[obj->direction], obj->x * SIZE, obj->y * SIZE);
+  setColour(orange);
+  fillOval(obj->x * SIZE, obj->y * SIZE, SIZE, SIZE);
   sleep(delay);
 }
 
@@ -56,8 +54,8 @@ void drawRobot(Robot* obj, int delay) {
 int* createHome() {
   int* coord = malloc(2 * sizeof(int));
   do {
-    coord[0] = randInt(1, width - 2);
-    coord[1] = randInt(1, height - 2);
+    coord[0] = randInt(1, WIDTH - 2);
+    coord[1] = randInt(1, HEIGHT - 2);
   } while (! emptySquare(coord));
   return coord;
 }
@@ -65,16 +63,16 @@ int* createHome() {
 
 void drawHome(int* coord) {
   background();
-  displayImage("Home.png", coord[0] * SIZE, coord[1] * SIZE);
-  foreground();
+  setColour(red);
+  fillRect(coord[0] * SIZE, coord[1] * SIZE, SIZE, SIZE);
 }
 
 
 // Initialise robot's memory by setting all coords to 0
 void initMemory(Robot* obj) {
-  obj->memory = malloc(height * sizeof(int*));
-  for (int y = 0; y < height; y ++) {
-    obj->memory[y] = calloc(width, sizeof(int));
+  obj->memory = malloc(HEIGHT * sizeof(int*));
+  for (int y = 0; y < HEIGHT; y ++) {
+    obj->memory[y] = calloc(WIDTH, sizeof(int));
   }
 }
 
@@ -185,7 +183,7 @@ void dfs(Robot* obj, int* home, bool draw, bool show_path, int delay) {
   if (atMarker(obj)) pickUpMarker(obj, show_path, draw);
 
   // Call dfs recursively
-  for (int i = 0; i < 4; i ++) {
+  for (int i = 0; i < 4; ++i) {
     forward(obj);
     bool visit = visited(obj);
     goBack(obj);
