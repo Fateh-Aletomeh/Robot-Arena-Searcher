@@ -28,21 +28,19 @@ The robot uses the depth-first search algorithm to search the entire arena. This
 
 ## Compile
 
-Command to compile program:
+### Unix
 
 ```bash
-gcc main.c graphics.c background.c robot.c
+gcc -Iinclude src/*.c -o robot.out
 ```
 
-OR
+### Windows
 
 ```bash
-gcc *.c
+gcc -Iinclude src\*.c -o robot.exe
 ```
 
 ## Run program
-
-By default, the `delay` of the robot is set to **50**, `show_path` (boolean value which, if true, leaves a green trace wherever the robot moves) is **false**.
 
 ### Flags
 
@@ -52,16 +50,16 @@ By default, the `delay` of the robot is set to **50**, `show_path` (boolean valu
 | show_path | 0 (false) | Set to 1 to leave green trace wherever the robot moves |
 | size      | 10        | Size of each square in grid                            |
 
-When running the program, you have the option to change these values in the command line. To set `show_path` to **false**, type **0**. To set it to **true**, type any **non-zero integer**.
+When running the program, you have the option to change these values in the command line, as shown below.
 
 ### Unix
 
 ```bash
-./a.out {delay} {show_path} {size} | java -jar drawapp-4.0.jar
+./robot.out {delay} {show_path} {size} | java -jar lib/drawapp-4.0.jar
 ```
 
 ### Windows
 
 ```bash
-.\a.exe {delay} {show_path} {size} | java -jar drawapp-4.0.jar
+.\robot.exe {delay} {show_path} {size} | java -jar lib\drawapp-4.0.jar
 ```
